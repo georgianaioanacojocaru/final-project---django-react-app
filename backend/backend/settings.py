@@ -1,6 +1,8 @@
 from pathlib import Path
 import os 
 from datetime import timedelta
+import ssl
+from django.core.mail.backends.smtp import EmailBackend
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -82,6 +84,14 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'sunnytheater.contact@gmail.com'
 EMAIL_HOST_PASSWORD = 'cnsumiwqtzhnybmx'
+
+# Create a custom SSL context with custom options
+custom_ssl_context = ssl.create_default_context()
+custom_ssl_context.check_hostname = False  # Disable hostname verification
+custom_ssl_context.verify_mode = ssl.CERT_NONE  # Disable certificate verification
+
+# Pass the custom SSL context to the EmailBackend
+email_backend = EmailBackend(ssl_context=custom_ssl_context)
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
