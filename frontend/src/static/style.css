@@ -1,0 +1,429 @@
+@font-face {
+    font-family: 'Boldenvan';
+    src: url('./fonts/BoldenVan.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'BabasNue';
+    src: url('./fonts/BebasNeue-Regular.woff') format('woff');
+}
+
+:root {
+    --primary-color : #2F4F4F;
+    --secondary-clolor: #FFD700;
+    --tertiary-color:#87CEFA;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Segoe UI;
+}
+
+body {
+    background-color: var(--primary-color) !important;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+nav {
+    padding: 0 2rem;
+}
+
+.navbar-logo {
+    color: var(--secondary-clolor);
+    font-family: Boldenvan;
+    text-decoration: none;
+}
+
+a.navbar-link {
+    color: white !important;
+    letter-spacing: 1px ;
+    font-family: Babasnue !important;
+    font-size: 20px;    
+    border-bottom: 2px solid var(--primary-color);
+}
+
+a.navbar-link:hover {
+    color: white !important;
+    border-bottom: 2px solid white;
+}
+
+.login-form {
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    position: absolute;
+    top: 50%;
+    box-shadow: 0px 0px 5px gainsboro;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem ;
+}
+
+.login-form h3 {
+    color: var(--tertiary-color);
+    font-weight: 800;
+    letter-spacing: 2px;    
+}
+
+.login-form label {
+    color: var(--tertiary-color);
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+.login-form input {
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid var(--tertiary-color);
+    padding: .2rem 1rem;
+}
+
+.login-form button {
+    color: white;
+    background-color: var(--tertiary-color);
+    border: none;
+    outline: none;
+    padding: .4rem 19.4%;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+
+.login-form .alter {
+    margin-top: 1rem;
+}
+
+.login-form .alter a {
+    color: var(--tertiary-color);
+}
+
+.movies {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.movs-heading {
+    color: white;
+    font-family: Babasnue;
+    letter-spacing: 3px;
+}
+
+.movie-card {
+    flex: 1 1  calc(33.33% - 80px);
+    margin-top: 10px;
+    position: relative;
+}
+
+.movie-card img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.movie-card .upper-container {
+    background-color: rgba(0, 0, 0, 0.722);
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    display: none;
+}
+
+.movie-card:hover .upper-container {
+    display: flex;
+    transition: .5s;
+}
+
+.movie-nav {
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-family: Babasnue;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+.movie-nav:hover {
+    color: var(--secondary-clolor);
+    text-decoration: underline;
+}
+
+.movie-card .upper-container a {
+    background-color: var(--secondary-clolor);
+    padding: .5rem 1rem;
+    border-radius: 30px;
+    text-decoration: none;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-wrap: nowrap;
+    color: white;
+    font-family: BabasNue;
+    letter-spacing: 1.5px;
+    font-size: 18px;
+}
+
+.movie-container h1 {
+    color: white;
+    font-family: Babasnue;
+    margin-top: 3rem;
+}
+
+.movie-container h3 {
+    color: var(--secondary-clolor);
+    font-family: Babasnue;
+}
+
+.movie-container h3 span {
+    color: white;
+    font-style: italic;
+}
+
+.movie-container .av-tickets {
+    color: var(--secondary-clolor);
+    font-family: Babasnue;
+    font-size: 29px;
+}
+
+.movie-container .av-tickets span {
+    color: white;
+    font-size: 20px;
+}
+
+.movie-container .desc {
+    color: white;
+    font-family: Babasnue;
+    letter-spacing: 2px;
+}
+
+.movie-container .buttons button:first-child {
+    color: white;
+    margin-right: 1rem;
+    background-color: var(--secondary-clolor);
+    padding: .5rem 1rem;
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    letter-spacing: 1.5px;
+    font-family: Babasnue;
+    font-size: 19px;
+}
+
+.movie-container .buttons button:nth-child(2) {
+    color: white;
+    background-color: var(--tertiary-color);
+    padding: .5rem 1rem;
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    font-family: Babasnue;
+    font-size: 19px;
+}
+
+.trailer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.seats-container {
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.51);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+}
+
+.seats-container .close-btn {
+    color: var(--secondary-clolor);
+    background-color: white;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    position: fixed;
+    right: 2%;
+    top: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 900;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.seats-container .seats {
+    background-color: white;
+    padding: 5rem;
+    max-width: 80%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: space-around;
+}
+
+.seats-container .seats .av-seat {
+    background-color: lightgray;
+    padding: .5rem;
+    font-size: 15px;
+    border: 5px groove gray;
+    width: 3rem;
+    cursor: pointer;
+    text-align: center;
+}
+
+.seats-container .seats .av-seat:hover {
+    background-color: var(--secondary-clolor);
+    color: white;
+}
+
+.seats-container .seats .n-av-seat {
+    background-color: red;
+    padding: .5rem;
+    font-size: 15px;
+    border: 5px groove red;
+    color: white;
+    width: 3rem;
+    cursor:not-allowed;
+    text-align: center;
+}
+
+.nothing-heading {
+    color: white;
+    font-family: Babasnue;
+    letter-spacing: 3px;
+    scale: 1.5;
+}
+
+.comments {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10%;
+}
+
+.comments .comments-heading {
+    color: white;
+    font-family: Babasnue;
+}
+
+.comment {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    width: fit-content;
+    max-width: 50rem;
+    border-bottom: 1.2px solid white;
+
+}
+
+.comment-username {
+    font-family: Babasnue;    
+    color: white;
+    font-size: 17px;
+    letter-spacing: 2px;
+}
+
+.comment-date {
+    color: lightgoldenrodyellow;
+}
+
+.comment-content {
+    color: white;
+    font-size: 19px;
+    font-family:Arial, Helvetica, sans-serif;
+    margin-bottom: 1rem;
+    margin-top: .5rem;
+}
+
+.comment-input {
+    display: flex;
+}
+.comment-input input {
+    width: 70%;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid white;
+    background:none;
+    color: white;
+    margin-right: .5rem;
+}
+
+.comment-input input::placeholder {
+    color: rgb(208, 199, 199);
+}
+
+.comment-input button {
+    color: white;
+    background-color: var(--secondary-clolor);
+    width: 2rem;
+    height: 2rem;
+    outline: none;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkout-wrapper {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.611);
+}
+
+.checkout-wrapper .checkout-close-btn {
+    color: var(--secondary-clolor);
+    background-color: white;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    position: fixed;
+    right: 2%;
+    top: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 900;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.checkout-wrapper .checkout-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);   
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+
