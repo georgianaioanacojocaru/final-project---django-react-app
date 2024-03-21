@@ -7,8 +7,6 @@ from backend.api.models import Movie
 from backend.api.serializers import MovieSerializer
 from backend.api.views import get_movies
 
-# Create your tests here.
-
 class GetMoviesAPITest(TestCase):
     def setUp(self):
         self.client = Client()
