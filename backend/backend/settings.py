@@ -29,6 +29,15 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'api',
+    "users.apps.UsersConfig",
+    "crispy_forms", #Updated here
+    "crispy_bootstrap5", #Updated here
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
 ]
 
 MIDDLEWARE = [
