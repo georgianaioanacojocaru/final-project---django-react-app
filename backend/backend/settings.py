@@ -19,10 +19,10 @@ DATABASE_HOST = env('DATABASE_HOST')
 DATABASE_PORT = env('DATABASE_PORT')
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(4ilmz0n!deb$r9%z2b2qdsku%4j#dfpg*&4))zawdiw)d3ir='
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'TRUE'
+DEBUG = os.environ.get('DEBUG') == 'TRUE' 
 
 AUTH_USER_MODEL = 'api.MyUser'
 
@@ -99,8 +99,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'sunnytheater.contact@gmail.com'
-EMAIL_HOST_PASSWORD = 'cnsumiwqtzhnybmx'
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 
 # Create a custom SSL context with custom options
 custom_ssl_context = ssl.create_default_context()
