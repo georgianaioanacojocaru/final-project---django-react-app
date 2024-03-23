@@ -12,12 +12,6 @@ environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DATABASE_NAME = env('DATABASE_NAME')
-DATABASE_USER = env('DATABASE_USER')
-DATABASE_PASSWORD = env('DATABASE_PASSWORD')
-DATABASE_HOST = env('DATABASE_HOST')
-DATABASE_PORT = env('DATABASE_PORT')
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['SECRET_KEY']
 
@@ -178,6 +172,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}")
     }
+
+DATABASE_NAME = env('DATABASE_NAME')
+DATABASE_USER = env('DATABASE_USER')
+DATABASE_PASSWORD = env('DATABASE_PASSWORD')
+DATABASE_HOST = env('DATABASE_HOST')
+DATABASE_PORT = env('DATABASE_PORT')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 X_FRAME_OPTIONS = 'ALLOWALL'
