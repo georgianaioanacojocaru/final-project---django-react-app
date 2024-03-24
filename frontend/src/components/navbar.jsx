@@ -9,10 +9,11 @@ export default function Navbar () {
     const [movies, setMovies] = useState([]);
     const auth = useContext(AuthContext);
     const navigate = useNavigate();
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
     const searchMovies = async (e) => {
         e.preventDefault();
-        const response = await fetch(`http://127.0.0.1:8000/api/search-movies/?query=${query}`, {
+        const response = await fetch(`${API_BASE_URL}/api/search-movies/?query=${query}`, {
             method:'GET',
             headers: {
                 'Content-Type':'application/json',
