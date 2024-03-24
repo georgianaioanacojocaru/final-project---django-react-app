@@ -14,16 +14,21 @@ export default function AuthProvider({ children }) {
     const [movies, setMovies] = useState([]);
     const [comments, setComments] = useState([]);
     const [loginResponseDetails, setLoginResponseDetails] = useState('');
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
     const registerUser = async (e) => {
         e.preventDefault();
 
-        const response = await fetch(`http://127.0.0.1:8000/api/register/`, {
+        const response = await fetch(`${API_BASE_URL}/api/register/`, {
             method:'POST',
             headers: {
                 'Content-Type':'application/json',
             },
-            body : JSON.stringify({first_name:e.target.first_name.value, last_name:e.target.last_name.value, email:e.target.email.value, password:e.target.password.value})
+            body : JSON.stringify({
+                first_name:e.target.first_name.value, 
+                last_name:e.target.last_name.value, 
+                email:e.target.email.value, 
+                password:e.target.password.value})
         })
 
         const data = await response.json();
@@ -41,7 +46,7 @@ export default function AuthProvider({ children }) {
     const loginUser = async (e) => {
 
         e.preventDefault();
-        const response = await fetch(`http://127.0.0.1:8000/api/token/`, {
+        const response = await fetch(`${API_BASE_URL}/api/token/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -69,7 +74,7 @@ export default function AuthProvider({ children }) {
 
     const getCommentsForCurrentMovie = async () => {
         console.log(movie.id);
-        const response = await fetch(`http://127.0.0.1:8000/api/get-comments/${movie.id}`, {
+        const response = await fetch(`${API_BASE_URL}/api/get-comments/${movie.id}`, {
             method:"GET",
             headers: {
                 'Content-Type':'application/json',
