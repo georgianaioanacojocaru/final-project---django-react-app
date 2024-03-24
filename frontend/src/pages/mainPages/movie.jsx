@@ -25,11 +25,12 @@ export default function MoviePage() {
     const { id } = useParams();
     const navigate = useNavigate();
     const auth = useContext(AuthContext);
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
     const getSeatsInfo = async (e) => {
 
         setShowingSeats(true);
-        const response = await fetch(`http://127.0.0.1:8000/api/get-seats/${id}`, {
+        const response = await fetch(`${API_BASE_URL}/api/get-seats/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -56,7 +57,7 @@ export default function MoviePage() {
     }
 
     const purchaseApproveHandler = async (e) => {
-        const response = await fetch(`http://127.0.0.1:8000/api/book-seat/`, {
+        const response = await fetch(`${API_BASE_URL}/api/book-seat/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -83,7 +84,7 @@ export default function MoviePage() {
     }
 
     const getMovie = async () => {
-        const response = await fetch(`http://127.0.0.1:8000/api/get-movie/${id}`, {
+        const response = await fetch(`${API_BASE_URL}/api/get-movie/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
