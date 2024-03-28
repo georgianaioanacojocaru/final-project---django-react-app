@@ -4,6 +4,7 @@ import { faArrowUp} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import baseURL from '../context/base';
 
 
 export default function CommentInput(props) {
@@ -12,11 +13,11 @@ export default function CommentInput(props) {
     const { movieId } = props;
     const navigate = useNavigate();
     const auth = useContext(AuthContext);
-    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 
     const createCommentHandler = async (e) => {
         e.preventDefault();
-        const response = await fetch(`${API_BASE_URL}/api/create-comment/`, {
+        const response = await fetch(`${baseURL}/api/create-comment/`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
