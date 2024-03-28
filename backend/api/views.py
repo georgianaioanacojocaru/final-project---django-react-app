@@ -1,16 +1,16 @@
-from django.shortcuts import render
-from rest_framework_simplejwt.views import TokenObtainPairView
-from .serializers import * 
-from django.core.mail import send_mail
-from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes
-from django.contrib.auth.hashers import make_password, check_password
-from rest_framework.permissions import IsAuthenticated
 from .models import * 
-import json 
-from rest_framework import status 
-from django.core.paginator import Paginator
+from .serializers import * 
 from django.contrib.auth import authenticate
+from django.contrib.auth.hashers import make_password, check_password
+from django.core.mail import send_mail
+from django.core.paginator import Paginator
+from django.shortcuts import render
+from rest_framework import status 
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+import json 
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
@@ -71,8 +71,7 @@ def get_movie(request, id):
     movie = None
 
     if id:
-        id = int(id)
-        movie = Movie.objects.get(id=id)
+        movie = Movie.objects.get(id=int(id))
         comments = Comment.objects.filter(movie=movie)
         comments = CommentSerializer(comments, many=True)
         if movie is not None:
@@ -91,8 +90,7 @@ def get_seats(request, id):
     response_status = None 
 
     if id:
-        id = int(id)
-        movie = Movie.objects.get(id=id)
+        movie = Movie.objects.get(id=int(id))
         reserved_seats = movie.reserved_seats.all()
         reserved_seats = SeatSerializer(reserved_seats, many=True)
         all_seats = Seat.objects.all()
