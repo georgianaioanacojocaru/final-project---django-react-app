@@ -14,7 +14,6 @@ export default function CommentInput(props) {
     const navigate = useNavigate();
     const auth = useContext(AuthContext);
 
-
     const createCommentHandler = async (e) => {
         e.preventDefault();
         const response = await fetch(`${baseURL}/api/create-comment/`, {
