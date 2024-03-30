@@ -13,16 +13,16 @@ environ.Env.read_env()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env.str('SECRET_KEY')
+SECRET_KEY = TEMPLATES = ['django-insecure-(4ilmz0n!deb$r9%z2b2qdsku%4j#dfpg*&4))zawdiw)d3ir=']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool("DEBUG", default=False)
+DEBUG = True
 
 AUTH_USER_MODEL = 'api.MyUser'
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '3000', os.environ.get('RENDER_HOSTNAME', '')]
 
-
+# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -89,12 +89,28 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
 
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR / "templates")],  # List of directories where Django will search for templates
+        'APP_DIRS': True,  # Django will look for templates in the "templates" subdirectory of installed apps
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
-EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+EMAIL_HOST_USER = env['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = env['EMAIL_HOST_PASSWORD']
 
 # Create a custom SSL context with custom options
 custom_ssl_context = ssl.create_default_context()
@@ -144,27 +160,14 @@ REST_FRAMEWORK = {
 
 ROOT_URLCONF = 'backend.urls'
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
-
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+# dj_database_url will load the database from the environment variable DATABASE_URL, if it exists,
+# otherwise falling back to the default sqlite database.
+
 
 DATABASES = {
     'default': dj_database_url.config(default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}")
@@ -179,7 +182,6 @@ DATABASE_PORT = env('DATABASE_PORT')
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 X_FRAME_OPTIONS = 'ALLOWALL'
 XS_SHARING_ALLOWED_METHODS = ['POST', 'GET', 'OPTIONS', 'PUT', 'DELETE']
-
 
 
 # Password validation
@@ -208,15 +210,12 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = 'frontend/src/static/'
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 
