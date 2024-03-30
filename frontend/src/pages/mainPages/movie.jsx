@@ -26,7 +26,6 @@ export default function MoviePage() {
     const { id } = useParams();
     const navigate = useNavigate();
     const auth = useContext(AuthContext);
-    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
     const getSeatsInfo = async (e) => {
 

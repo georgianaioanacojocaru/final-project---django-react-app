@@ -6,7 +6,6 @@ import baseURL from '../mainPages/base';
 export default function HomePage() {
     const [movies, setMovies] = useState([]);
     const navigate = useNavigate();
-    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
     const getMovies = async () => {
 
