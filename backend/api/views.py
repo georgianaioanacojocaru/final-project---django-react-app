@@ -71,7 +71,8 @@ def get_movie(request, id):
     movie = None
 
     if id:
-        movie = Movie.objects.get(id=int(id))
+        id = int(id)
+        movie = Movie.objects.get(id=id)
         comments = Comment.objects.filter(movie=movie)
         comments = CommentSerializer(comments, many=True)
         if movie is not None:
@@ -90,7 +91,8 @@ def get_seats(request, id):
     response_status = None 
 
     if id:
-        movie = Movie.objects.get(id=int(id))
+        id = int(id)
+        movie = Movie.objects.get(id=id)
         reserved_seats = movie.reserved_seats.all()
         reserved_seats = SeatSerializer(reserved_seats, many=True)
         all_seats = Seat.objects.all()
@@ -110,36 +112,48 @@ def get_seats(request, id):
 def book_seat(request):
     message = None
     user = request.user
-    request = json.loads(request.body)
-    print(user)
+    req_data = json.loads(request.body)
 
-    seat_id = request.get('seat_id')
-    movie_id = request.get('movie_id')
+    seat_id = req_data.get('seat_id')
+    movie_id = req_data.get('movie_id')
 
-    movie = Movie.objects.get(id=movie_id)
-    if movie_id and seat_id and movie.tickets_available:
+    if not (seat_id and movie_id):
+        return Response({'message': 'Both seat_id and movie_id are required'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        movie = Movie.objects.get(id=movie_id)
         seat = Seat.objects.get(id=seat_id)
-        movie.reserved_seats.add(seat)
-        movie.tickets = movie.tickets - 1
-        movie.save()
-        send_mail(
+
+        if seat in movie.reserved_seats.all():
+            return Response({'message': 'Seat is already booked'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if movie.tickets_available > 0:
+            movie.reserved_seats.add(seat)
+            movie.tickets -= 1
+            movie.save()
+
+            send_mail(
                 'Seat Booking Confirmation',
-                f'You have successfully booked a seat for the movie {movie.title} on data {movie.date_time}. Your seat is {seat.name}. Thank you for your interest',
-                'sunnyteather.contact@gmail.com',  
+                f'You have successfully booked a seat for the movie {movie.title} on date {movie.date_time}. Your seat is {seat.name}. Thank you for your interest',
+                'sunnytheater.contact@gmail.com',  
                 [user.email],
                 fail_silently=False,
-                )
-        message = "You have successfully booked a seat"
-        response_status = status.HTTP_200_OK
-        if movie.tickets == 0:
-            movie.tickets_available = False
-            movie.save()
-    else:
-        response_status = status.HTTP_400_BAD_REQUEST
-        message = 'Either Movie Id or Seat Id was not provided'
+            )
+            message = "You have successfully booked a seat"
+            
+            if movie.tickets == 0:
+                movie.tickets_available = False
+                movie.save()
+            return Response({'message': message}, status=status.HTTP_200_OK)
+        else:
+            return Response({'message': 'No tickets available for this movie'}, status=status.HTTP_400_BAD_REQUEST)
 
-    return Response({'message':message}, status=response_status)
-
+    except Movie.DoesNotExist:
+        return Response({'message': 'Movie not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Seat.DoesNotExist:
+        return Response({'message': 'Seat not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'message': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
