@@ -218,4 +218,6 @@ STATIC_URL = 'frontend/src/static/'
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-
+CORS_ORIGIN_WHITELIST = [
+     "http://localhost:5173",
+]
