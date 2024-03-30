@@ -19,6 +19,7 @@ SECRET_KEY = 'django-insecure-(4ilmz0n!deb$r9%z2b2qdsku%4j#dfpg*&4))zawdiw)d3ir=
 DEBUG = True
 
 AUTH_USER_MODEL = 'api.MyUser'
+DISABLE_AUTHENTICATION_WHEN_DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '3000', os.environ.get('RENDER_HOSTNAME', '')]
 
