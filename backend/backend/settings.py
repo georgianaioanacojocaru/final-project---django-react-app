@@ -107,19 +107,13 @@ TEMPLATES = [
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.gmail.com'  # SMTP server address
 EMAIL_USE_TLS = True
-EMAIL_PORT = 587
+EMAIL_PORT = 587 # SMTP server port
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-
-# Create a custom SSL context with custom options
-custom_ssl_context = ssl.create_default_context()
-custom_ssl_context.check_hostname = False  # Disable hostname verification
-custom_ssl_context.verify_mode = ssl.CERT_NONE  # Disable certificate verification
-
-# Pass the custom SSL context to the EmailBackend
-email_backend = EmailBackend(ssl_context=custom_ssl_context)
+DEFAULT_FROM_EMAIL = 'sunnytheater.contact@gmail.com'  # Default sender email address
+EMAIL_SECRET_KEY= env('EMAIL_SECRET_KEY')
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
