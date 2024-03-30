@@ -13,7 +13,7 @@ environ.Env.read_env()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = TEMPLATES = ['django-insecure-(4ilmz0n!deb$r9%z2b2qdsku%4j#dfpg*&4))zawdiw)d3ir=']
+SECRET_KEY = 'django-insecure-(4ilmz0n!deb$r9%z2b2qdsku%4j#dfpg*&4))zawdiw)d3ir='
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -92,7 +92,7 @@ SIMPLE_JWT = {
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR / "templates")],  # List of directories where Django will search for templates
+        'DIRS': [],  # List of directories where Django will search for templates
         'APP_DIRS': True,  # Django will look for templates in the "templates" subdirectory of installed apps
         'OPTIONS': {
             'context_processors': [
@@ -109,8 +109,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = env['EMAIL_HOST_USER']
-EMAIL_HOST_PASSWORD = env['EMAIL_HOST_PASSWORD']
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
 # Create a custom SSL context with custom options
 custom_ssl_context = ssl.create_default_context()
@@ -215,8 +215,9 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = 'frontend/src/static/'
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE ='whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 
 CORS_ORIGIN_WHITELIST = [
      "http://localhost:5173",
