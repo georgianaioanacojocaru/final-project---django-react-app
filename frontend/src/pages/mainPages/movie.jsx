@@ -8,6 +8,7 @@ import MovieNavigation from "../../components/movieNavigation";
 import { AuthContext } from "../../context/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEuro } from "@fortawesome/free-solid-svg-icons";
+import baseURL from '../mainPages/base';
 
 
 const client_id = process.env.REACT_APP_PAYPAL_CLIENT_ID;
@@ -30,7 +31,7 @@ export default function MoviePage() {
     const getSeatsInfo = async (e) => {
 
         setShowingSeats(true);
-        const response = await fetch(`${API_BASE_URL}/api/get-seats/${id}`, {
+        const response = await fetch(`${baseURL}/api/get-seats/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -57,7 +58,7 @@ export default function MoviePage() {
     }
 
     const purchaseApproveHandler = async (e) => {
-        const response = await fetch(`${API_BASE_URL}/api/book-seat/`, {
+        const response = await fetch(`${baseURL}/api/book-seat/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -84,7 +85,7 @@ export default function MoviePage() {
     }
 
     const getMovie = async () => {
-        const response = await fetch(`${API_BASE_URL}/api/get-movie/${id}`, {
+        const response = await fetch(`${baseURL}/api/get-movie/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MovieCard from "../../components/movieCard";
+import baseURL from '../mainPages/base';
 
 export default function HomePage() {
     const [movies, setMovies] = useState([]);
@@ -10,7 +11,7 @@ export default function HomePage() {
     const getMovies = async () => {
 
         try {
-            const response = await fetch(`${API_BASE_URL}/api/get-movies/`, {
+            const response = await fetch(`${baseURL}/api/get-movies/`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
