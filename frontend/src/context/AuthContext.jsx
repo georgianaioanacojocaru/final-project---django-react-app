@@ -1,13 +1,11 @@
 import { jwtDecode } from "jwt-decode";
 import React, { createContext, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
 import baseURL from './base';
 
 
 export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
-
     const [tokens, setTokens] = useState(localStorage.getItem('tokens') ? localStorage.getItem('tokens') : null);
     const [user, setUser] = useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null);
     const [movie, setMovie] = useState({});
